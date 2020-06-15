@@ -1,17 +1,3 @@
-export function makeTypesObj(properties: { [key: string]: any }) {
-  /*
-   * Create a set of key, value pairs that describes the expected properties
-   * of an object as well as their types.
-   *
-   * Used in tests to verify that endpoints return data with correct structure.
-   */
-  let tar = {};
-  for (let prop in properties) {
-    tar = { ...tar, ...{ [prop]: properties[prop].type } };
-  }
-  return tar;
-}
-
 export function randCoords(): { lon: number; lat: number } {
   /**
    * Generate a pair of random coordinates. Coordinates will be

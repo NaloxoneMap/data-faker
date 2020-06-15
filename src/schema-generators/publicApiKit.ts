@@ -1,4 +1,4 @@
-import { publicApiKitSchema } from './schemas';
+import { publicApiKitSchema } from '../schemas';
 
 export const publicApiKitSchemaGen = (num?: number) => {
   /**
@@ -12,6 +12,7 @@ export const publicApiKitSchemaGen = (num?: number) => {
   const props = schema.items.properties;
   // Setting minItems tells generator to create specified number of items
   schema.minItems = num || 5; // Default
+  schema.maxItems = num || 5;
   const location = props.location.properties;
   const point = location.point.properties;
   // Make expiration date in the future

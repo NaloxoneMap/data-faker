@@ -1,6 +1,6 @@
 import { Kit } from './interfaces';
 import jsf from './jsf';
-import { makeTypesObj, randCoords } from './util';
+import { randCoords } from './util';
 import { publicApiKitSchemaGen } from './publicApiKit';
 
 const _generate = async (schema: any): Promise<any[]> => {
@@ -27,15 +27,4 @@ export const genPublicApiKit = async (num: number): Promise<Kit[]> => {
     item.location.point.coordinates = randCoords();
     return item;
   });
-};
-
-export const publicApiTypeObjGen = (key: string): { [key: string]: string } => {
-  /**
-   * @param {key}: Key of the the JSONSchema object
-   *
-   * @summary: Input a key, and get a {key: value} pair where the value
-   * is the expected type of an attribute at that key on a Kit object.
-   * Used for testing return types.
-   */
-  return makeTypesObj(publicApiKitSchemaGen()[key]);
 };
