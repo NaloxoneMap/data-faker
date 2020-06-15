@@ -1,0 +1,20 @@
+language: node_js
+node_js:
+  - '12.14'
+env:
+  global:
+    - CODECOV_TOKEN="$CODECOV_TOKEN"
+
+before_install:
+  - bash <(curl -s https://codecov.io/bash)
+  - npm install
+
+script:
+  - npm run test
+
+deploy:
+  on:
+    branch: master
+  provider: npm
+  email: '$NPM_EMAIL'
+  api_key: '$NPM_AUTH_TOKEN'
