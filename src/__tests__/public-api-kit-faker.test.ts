@@ -40,4 +40,10 @@ describe('Public api kit functions', () => {
     expect(result.length).toEqual(10);
     done();
   });
+
+  it('generates 5 kits by default', async (done) => {
+    const result = await genPublicApiKit();
+    expect(result.length).toEqual(5);
+    done();
+  });
 });

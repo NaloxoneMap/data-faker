@@ -1,13 +1,13 @@
 import { Kit } from './interfaces';
 import jsf from './jsf';
 import { randCoords } from './util';
-import { publicApiKitSchemaGen } from './publicApiKit';
+import { publicApiKitSchemaGen } from './schema-generators/publicApiKit';
 
 const _generate = async (schema: any): Promise<any[]> => {
   return await jsf.resolve(schema);
 };
 
-export const genPublicApiKit = async (num: number): Promise<Kit[]> => {
+export const genPublicApiKit = async (num?: number): Promise<Kit[]> => {
   /**
    * @param {num}: Number of fake data objects that will be generated
    *
