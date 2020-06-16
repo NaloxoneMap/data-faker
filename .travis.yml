@@ -13,8 +13,8 @@ script:
   - npm run test
 
 deploy:
-  on:
-    branch: master
   provider: npm
   email: '$NPM_EMAIL'
   api_key: '$NPM_AUTH_TOKEN'
+  on:
+    branch: master
