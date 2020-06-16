@@ -6,7 +6,7 @@ env:
     - CODECOV_TOKEN="$CODECOV_TOKEN"
 
 before_install:
-  - bash <(curl -s https://codecov.io/bash)
+  - bash <(curl -s https://codecov.io/bash) -v
   - npm install
 
 script:
