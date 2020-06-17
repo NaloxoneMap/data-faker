@@ -6,6 +6,16 @@ Generate fake data for the Naloxone Map project.
 
     npm -i --save @naloxonemap/data-faker
 
+## API
+
+- genPublicApiKit
+
+  parameters: num: number. Default = 5
+
+  returns array of kits. First 3 will always have an expires value in the past.
+
+  [sample](#public-api-kit)
+
 ## Usage
 
     import { genPublicApiKit } from '@naloxonemap/data-faker';
@@ -27,7 +37,7 @@ Generate fake data for the Naloxone Map project.
           postalZip: '59233',
           country: 'Canada',
           provinceState: 'Québec',
-          point: { type: 'Point', coordinates: [Object] },
+          point: { type: 'Point', coordinates: {lon: 45.52056, lat: -73.582177} },
           city: 'Mireyaville'
         },
         lastVerified: '2002-03-23T18:29:44.294Z',
