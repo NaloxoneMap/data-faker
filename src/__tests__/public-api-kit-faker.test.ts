@@ -9,13 +9,12 @@ describe('Public api kit functions', () => {
       const { point } = location;
       expect(typeof item._id).toEqual('string');
       expect(typeof item.location).toEqual('object');
-      expect(typeof item.lastVerified).toEqual('string');
+      expect(typeof item.lastVerified).toEqual('object');
       expect(typeof item.opensAt).toEqual('string');
       expect(typeof item.closesAt).toEqual('string');
       expect(typeof item.openOn).toEqual('object');
-      // Disabled due to bug in faker.
-      // Dates at 0ms past minute are strings. Others are objects.
-      // expect(typeof item.expires).toEqual('object');
+
+      expect(typeof item.expires).toEqual('object');
       expect(typeof item.organizationName).toEqual('string');
       expect(typeof notes).toEqual('object');
 

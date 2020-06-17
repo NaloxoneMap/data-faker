@@ -22,6 +22,8 @@ export const genPublicApiKit = async (num?: number): Promise<Kit[]> => {
       date.setMonth(date.getMonth() - 3);
       item.expires = date;
     }
+    item.expires = new Date(item.expires);
+    item.lastVerified = new Date(item.lastVerified);
     // Need to generate own coordinates because of bug
     // in faker library
     item.location.point.coordinates = randCoords();
