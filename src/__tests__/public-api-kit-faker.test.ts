@@ -1,10 +1,10 @@
 import { genPublicApiKit } from '../index';
-import { Kit } from '../interfaces';
+import { PublicApiKit } from '../interfaces';
 
 describe('Public api kit functions', () => {
   it('generates expected number of objects, whose attributes are of correct type', async (done) => {
     const result = await genPublicApiKit(10);
-    result.forEach((item: Kit) => {
+    result.forEach((item: PublicApiKit) => {
       const { location, notes } = item;
       const { point } = location;
       expect(typeof item._id).toEqual('string');
