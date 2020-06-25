@@ -30,3 +30,5 @@ export const genPublicApiKit = async (num?: number): Promise<PublicApiKit[]> => 
     return item;
   });
 };
+
+export { PublicApiKit };
