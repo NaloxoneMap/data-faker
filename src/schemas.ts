@@ -51,8 +51,8 @@ export const publicApiKitSchema = {
         },
       },
       lastVerified: { type: 'string', format: 'date-time' },
-      opensAt: { type: 'string', format: 'time' },
-      closesAt: { type: 'string', format: 'time' },
+      opensAt: { type: 'string', pattern: '^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$' },
+      closesAt: { type: 'string', pattern: '^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$' },
       openOn: {
         type: 'array',
         items: {
@@ -71,7 +71,7 @@ export const publicApiKitSchema = {
           type: 'object',
           required: ['locale', 'content'],
           properties: {
-            locale: { type: 'string' },
+            locale: { type: 'string', pattern: '(en|fr)' },
             content: { type: 'string' },
           },
         },
