@@ -2,9 +2,7 @@ export interface PublicApiKit {
   _id: string;
   location: Location;
   lastVerified: Date;
-  opensAt: string; // time
-  closesAt: string; // time
-  openOn: [Weekday];
+  openingHours: [{ weekday: Weekday; opensAt: string; closesAt: string }];
   organizationName: string;
   expires: Date;
   notes?: [{ locale: string; content: string }];

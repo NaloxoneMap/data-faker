@@ -51,17 +51,19 @@ export const publicApiKitSchema = {
         },
       },
       lastVerified: { type: 'string', format: 'date-time' },
-      opensAt: { type: 'string', pattern: '^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$' },
-      closesAt: { type: 'string', pattern: '^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$' },
-      openOn: {
+      openingHours: {
         type: 'array',
         items: {
-          type: 'integer',
-          minItems: 1,
-          maxItems: 7,
-          minimum: 0,
-          maximum: 6,
+          type: 'object',
+          required: ['weekday', 'opensAt', 'closesAt'],
+          properties: {
+            weekday: { type: 'integer', maximum: 6, minimum: 0 },
+            opensAt: { type: 'string', pattern: '^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$' },
+            closesAt: { type: 'string', pattern: '^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$' },
+          },
         },
+        minItems: 7,
+        maxItems: 7,
       },
       expires: { type: 'string', format: 'date-time' },
       organizationName: { type: 'string' },

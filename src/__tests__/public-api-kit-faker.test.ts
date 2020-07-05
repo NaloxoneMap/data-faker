@@ -5,19 +5,25 @@ describe('Public api kit functions', () => {
   it('generates expected number of objects, whose attributes are of correct type', async (done) => {
     const result = await genPublicApiKit(10);
     result.forEach((item: PublicApiKit) => {
-      const { location, notes } = item;
+      const { location, notes, openingHours } = item;
       const { point } = location;
       expect(typeof item._id).toEqual('string');
       expect(typeof item.location).toEqual('object');
       expect(typeof item.lastVerified).toEqual('object');
-      expect(typeof item.opensAt).toEqual('string');
-      expect(typeof item.closesAt).toEqual('string');
-      expect(typeof item.openOn).toEqual('object');
 
       expect(typeof item.expires).toEqual('object');
       expect(typeof item.organizationName).toEqual('string');
       expect(typeof notes).toEqual('object');
 
+      if (openingHours) {
+        openingHours.forEach((day) => {
+          expect(typeof day.weekday).toEqual('number');
+          const regex = RegExp('[0-6]');
+          expect(regex.test(day.weekday.toString())).toBe(true);
+          expect(typeof day.opensAt).toEqual('string');
+          expect(typeof day.closesAt).toEqual('string');
+        });
+      }
       if (notes) {
         notes.forEach((note) => {
           expect(typeof note.locale).toEqual('string');
