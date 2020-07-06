@@ -11,17 +11,7 @@ export const publicApiKitSchema = {
   type: 'array',
   items: {
     type: 'object',
-    required: [
-      '_id',
-      'location',
-      'lastVerified',
-      'opensAt',
-      'closesAt',
-      'openOn',
-      'expires',
-      'organizationName',
-      'notes',
-    ],
+    required: ['_id', 'location', 'lastVerified', 'openingHours', 'expires', 'organizationName', 'notes'],
     properties: {
       _id: { type: 'string' },
       location: {
