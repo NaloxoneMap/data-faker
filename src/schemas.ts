@@ -48,8 +48,8 @@ export const publicApiKitSchema = {
           required: ['weekday', 'opensAt', 'closesAt'],
           properties: {
             weekday: { type: 'integer', maximum: 6, minimum: 0 },
-            opensAt: { type: 'string', pattern: '^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$' },
-            closesAt: { type: 'string', pattern: '^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$' },
+            opensAt: { type: 'string', pattern: '^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$|closed' },
+            closesAt: { type: 'string', pattern: '^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$|closed' },
           },
         },
         minItems: 7,
