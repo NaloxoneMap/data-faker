@@ -3,7 +3,7 @@ import { PublicApiKit } from '../interfaces';
 
 describe('Public api kit functions', () => {
   it('generates expected number of objects, whose attributes are of correct type', async (done) => {
-    const result = await genPublicApiKit(10);
+    const result = await genPublicApiKit(500);
     result.forEach((item: PublicApiKit) => {
       const { location, notes, openingHours } = item;
       const { point } = location;
@@ -14,6 +14,7 @@ describe('Public api kit functions', () => {
       expect(typeof item.expires).toEqual('object');
       expect(typeof item.organizationName).toEqual('string');
       expect(typeof notes).toEqual('object');
+      expect(openingHours.length).toEqual(7);
 
       if (openingHours) {
         openingHours.forEach((day) => {
@@ -42,7 +43,7 @@ describe('Public api kit functions', () => {
       expect(typeof point.coordinates.lat).toEqual('number');
       expect(typeof point.coordinates.lon).toEqual('number');
     });
-    expect(result.length).toEqual(10);
+    expect(result.length).toEqual(500);
     done();
   });
 
