@@ -18,6 +18,20 @@ export enum Weekday {
   Saturday = 6,
 }
 
+export interface User {
+  _id: string;
+  username: string;
+  password: string;
+  email: string;
+  suspended: boolean;
+  created_at: string;
+  last_login: Date;
+  activated: boolean;
+  invited_by: { _id: string; email: string; username?: string };
+  kits_modified: number;
+  kits_added: number;
+}
+
 export interface Location {
   point: {
     type: string; // Point. GEOjson field requirement.

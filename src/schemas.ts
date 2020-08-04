@@ -6,6 +6,55 @@
  * it is being used to generate.
  *
  */
+export const usersSchema = {
+  definitions: {
+    email: { type: 'string', pattern: '^[^s@]+@[^s@]+.[^s@]+$' },
+  },
+  type: 'array',
+  items: {
+    type: 'object',
+    required: [
+      '_id',
+      'username',
+      'password',
+      'activated',
+      'invited_by',
+      'created_at',
+      'last_login',
+      'suspended',
+      'kits_modified',
+      'kits_added',
+      'email',
+      'roles',
+    ],
+    properties: {
+      _id: { type: 'string' },
+      kits_added: { type: 'number', minimum: 0 },
+      kits_modified: { type: 'number', minimum: 0 },
+      password: { type: 'string' },
+      username: { type: 'string' },
+      activated: { type: 'boolean' },
+
+      created_at: { type: 'string', format: 'date-time' },
+      last_login: { type: 'string', format: 'date-time' },
+      suspended: { type: 'boolean' },
+      email: { $ref: '#/definitions/email' },
+      invited_by: {
+        type: 'object',
+        required: ['email', 'username', '_id'],
+        properties: {
+          _id: { type: 'string' },
+          username: { type: 'string' },
+          email: { $ref: '#/definitions/email' },
+        },
+      },
+      roles: {
+        type: 'array',
+        items: { type: 'string', pattern: 'MANAGE_USERS | VERIFY_KITS | MANAGE_KITS', minItems: 1, maxItems: 3 },
+      },
+    },
+  },
+};
 
 export const publicApiKitSchema = {
   type: 'array',

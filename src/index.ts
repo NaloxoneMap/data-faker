@@ -1,7 +1,8 @@
-import { PublicApiKit } from './interfaces';
+import { PublicApiKit, User } from './interfaces';
 import jsf from './jsf';
 import { randCoords } from './util';
 import { publicApiKitSchemaGen } from './schema-generators/publicApiKit';
+import { userSchemaGen } from './schema-generators/user';
 
 const _generate = async (schema: any): Promise<any[]> => {
   return await jsf.resolve(schema);
@@ -31,4 +32,20 @@ export const genPublicApiKit = async (num?: number): Promise<PublicApiKit[]> => 
   });
 };
 
-export { PublicApiKit };
+export const genUsers = async (num?: number): Promise<User[]> => {
+  /**
+   * @param {num}: Number of fake data objects that will be generated
+   *
+   * @returns an array of valid User objects.
+   */
+
+  const data = await _generate(userSchemaGen(num));
+
+  return data.map((user: User) => {
+    user.activated = true;
+    user.suspended = false;
+    return user;
+  });
+};
+
+export { PublicApiKit, User };
