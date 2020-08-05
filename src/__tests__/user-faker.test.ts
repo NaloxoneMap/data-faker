@@ -15,8 +15,6 @@ describe('genUsers', () => {
       'kits_modified',
       'roles',
     ];
-
-    console.log(users);
     const INVITE_PROPS = ['_id', 'username', 'email'];
 
     const test = PROPERTIES.every((prop) => users.every((user) => user.hasOwnProperty(prop)));
