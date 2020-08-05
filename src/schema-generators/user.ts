@@ -1,5 +1,4 @@
 import { usersSchema } from '../schemas';
-import { Types } from 'mongoose';
 
 export const userSchemaGen = (num?: number) => {
   /**
@@ -13,7 +12,6 @@ export const userSchemaGen = (num?: number) => {
   // Setting minItems tells generator to create specified number of items
   schema.minItems = num || 5; // Default
   schema.maxItems = num || 5;
-  props._id = Types.ObjectId().toHexString();
   props.email.faker = 'internet.email';
   props.username.faker = 'internet.userName';
   props.invited_by.properties.username.faker = 'internet.userName';

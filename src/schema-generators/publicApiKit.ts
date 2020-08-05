@@ -1,5 +1,4 @@
 import { publicApiKitSchema } from '../schemas';
-import { Types } from 'mongoose';
 
 export const publicApiKitSchemaGen = (num?: number) => {
   /**
@@ -21,7 +20,6 @@ export const publicApiKitSchemaGen = (num?: number) => {
   newDate.setMonth(newDate.getMonth() + 1);
   props.expires.pattern = newDate.toDateString();
   // Setting .faker attributes specifies data generation rules
-  props._id = Types.ObjectId().toHexString();
   props.organizationName.faker = 'company.companyName';
   location.provinceState.pattern = 'Québec'; // Include accent to test that search ignores diacritics
   location.address.faker = 'address.streetAddress';
