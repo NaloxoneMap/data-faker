@@ -8,7 +8,7 @@
  */
 export const usersSchema = {
   definitions: {
-    email: { type: 'string', pattern: '^[^s@]+@[^s@]+.[^s@]+$' },
+    email: { type: 'string', format: 'email' },
   },
   type: 'array',
   items: {
