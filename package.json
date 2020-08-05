@@ -1,6 +1,6 @@
 {
   "name": "@naloxonemap/data-faker",
-  "version": "3.0.2",
+  "version": "3.0.3",
   "description": "Generate fake data for the Naloxone Map project.",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
