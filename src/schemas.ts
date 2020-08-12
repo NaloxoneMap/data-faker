@@ -59,11 +59,11 @@ export const kitSchema = {
   definitions: {
     user: {
       type: 'object',
-      required: ['username', 'userId', 'email'],
+      required: ['username', '_id', 'email'],
       properties: {
         username: { type: 'string' },
         email: { type: 'string', format: 'email' },
-        userId: { type: 'string' },
+        _id: { type: 'string' },
       },
     },
   },
