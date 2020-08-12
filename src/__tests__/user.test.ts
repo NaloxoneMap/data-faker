@@ -17,6 +17,8 @@ describe('genUsers', () => {
     ];
     const INVITE_PROPS = ['_id', 'username', 'email'];
 
+    console.log(users[0]);
+
     const test = PROPERTIES.every((prop) => users.every((user) => user.hasOwnProperty(prop)));
     const inviteTest = INVITE_PROPS.every((prop) => users.every((user) => user.invited_by.hasOwnProperty(prop)));
 

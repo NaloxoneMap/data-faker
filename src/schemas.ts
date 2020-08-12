@@ -34,7 +34,6 @@ export const usersSchema = {
       password: { type: 'string' },
       username: { type: 'string' },
       activated: { type: 'boolean' },
-
       created_at: { type: 'string', format: 'date-time' },
       last_login: { type: 'string', format: 'date-time' },
       suspended: { type: 'boolean' },
@@ -56,13 +55,56 @@ export const usersSchema = {
   },
 };
 
-export const publicApiKitSchema = {
+export const kitSchema = {
+  definitions: {
+    user: {
+      type: 'object',
+      required: ['username', 'userId', 'email'],
+      properties: {
+        username: { type: 'string' },
+        email: { type: 'string', format: 'email' },
+        userId: { type: 'string' },
+      },
+    },
+  },
   type: 'array',
   items: {
     type: 'object',
-    required: ['_id', 'location', 'lastVerified', 'openingHours', 'expires', 'organizationName', 'notes'],
+    required: [
+      '_id',
+      'location',
+      'lastVerified',
+      'openingHours',
+      'expires',
+      'organizationName',
+      'notes',
+      'createdBy',
+      'createdOn',
+      'lastVerifiedBy',
+      'lastEditedOn',
+      'lastEditedBy',
+      'contacts',
+    ],
     properties: {
       _id: { type: 'string' },
+      createdBy: { $ref: '#/definitions/user' },
+      createdOn: { type: 'string', format: 'date-time' },
+      lastVerifiedBy: { $ref: '#/definitions/user' },
+      lastEditedOn: { type: 'string', format: 'date-time' },
+      lastEditedBy: { $ref: '#/definitions/user' },
+      contacts: {
+        type: 'array',
+        items: {
+          type: 'object',
+          required: ['info', 'name', 'public', 'primary'],
+          properties: {
+            info: { type: 'string' },
+            name: { type: 'string' },
+            public: { type: 'boolean' },
+            primary: { type: 'boolean' },
+          },
+        },
+      },
       location: {
         type: 'object',
         required: ['address', 'postalZip', 'country', 'provinceState', 'point', 'city'],
@@ -104,7 +146,7 @@ export const publicApiKitSchema = {
         minItems: 7,
         maxItems: 7,
       },
-      expires: { type: 'string', format: 'date-time' },
+      expires: { type: 'string' },
       organizationName: { type: 'string' },
       notes: {
         type: 'array',

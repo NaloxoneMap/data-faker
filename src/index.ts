@@ -1,7 +1,7 @@
-import { PublicApiKit, User } from './interfaces';
+import { Kit, User } from './interfaces';
 import jsf from './jsf';
 import { randCoords } from './util';
-import { publicApiKitSchemaGen } from './schema-generators/publicApiKit';
+import { kitSchemaGen } from './schema-generators/kit';
 import { userSchemaGen } from './schema-generators/user';
 import { Types } from 'mongoose';
 
@@ -9,15 +9,15 @@ const _generate = async (schema: any): Promise<any[]> => {
   return await jsf.resolve(schema);
 };
 
-export const genPublicApiKit = async (num?: number): Promise<PublicApiKit[]> => {
+export const genKits = async (num?: number): Promise<Kit[]> => {
   /**
    * @param {num}: Number of fake data objects that will be generated
    *
    * @returns an array of valid Kit objects.
    */
-  const data = await _generate(publicApiKitSchemaGen(num));
+  const data = await _generate(kitSchemaGen(num));
 
-  return data.map((item: PublicApiKit, index: number) => {
+  return data.map((item: Kit, index: number) => {
     // Some of the fake data should be expired.
     if (index < 3) {
       const date = new Date();
@@ -51,4 +51,4 @@ export const genUsers = async (num?: number): Promise<User[]> => {
   });
 };
 
-export { PublicApiKit, User };
+export { Kit, User };

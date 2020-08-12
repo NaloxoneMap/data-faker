@@ -1,4 +1,4 @@
-export interface PublicApiKit {
+export interface Kit {
   _id: string;
   location: Location;
   lastVerified: Date;

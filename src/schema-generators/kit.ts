@@ -1,14 +1,14 @@
-import { publicApiKitSchema } from '../schemas';
+import { kitSchema } from '../schemas';
 
-export const publicApiKitSchemaGen = (num?: number) => {
+export const kitSchemaGen = (num?: number) => {
   /**
    * @param {num}: Number of fake data objects that will be generated
    *
    * @returns a JSONSchema object that matches the data
-   * expected by the public api.
+   * expected by the api.
    */
 
-  const schema: any = { ...publicApiKitSchema };
+  const schema: any = { ...kitSchema };
   const props = schema.items.properties;
   // Setting minItems tells generator to create specified number of items
   schema.minItems = num || 5; // Default
