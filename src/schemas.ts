@@ -73,7 +73,7 @@ export const kitSchema = {
     required: [
       '_id',
       'location',
-      'lastVerified',
+      'lastVerifiedOn',
       'openingHours',
       'expires',
       'organizationName',
@@ -131,7 +131,7 @@ export const kitSchema = {
           provinceState: { type: 'string' },
         },
       },
-      lastVerified: { type: 'string', format: 'date-time' },
+      lastVerifiedOn: { type: 'string', format: 'date-time' },
       openingHours: {
         type: 'array',
         items: {
