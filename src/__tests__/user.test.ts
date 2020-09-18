@@ -7,20 +7,20 @@ describe('genUsers', () => {
       '_id',
       'suspended',
       'activated',
-      'invited_by',
+      'invitedBy',
       'username',
+      'lastLogin',
       'email',
-      'created_at',
-      'kits_added',
-      'kits_modified',
+      'invitedOn',
+      'kitsAdded',
+      'kitsModified',
+      'kitsVerified',
       'roles',
     ];
     const INVITE_PROPS = ['_id', 'username', 'email'];
 
-    console.log(users[0]);
-
     const test = PROPERTIES.every((prop) => users.every((user) => user.hasOwnProperty(prop)));
-    const inviteTest = INVITE_PROPS.every((prop) => users.every((user) => user.invited_by.hasOwnProperty(prop)));
+    const inviteTest = INVITE_PROPS.every((prop) => users.every((user) => user.invitedBy.hasOwnProperty(prop)));
 
     expect(test).toEqual(true);
     expect(inviteTest).toEqual(true);

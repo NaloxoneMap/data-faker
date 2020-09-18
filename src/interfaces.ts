@@ -24,12 +24,13 @@ export interface User {
   password: string;
   email: string;
   suspended: boolean;
-  created_at: string;
-  last_login: Date;
+  invitedOn: string;
+  lastLogin: Date;
   activated: boolean;
-  invited_by: { _id: string; email: string; username?: string };
-  kits_modified: number;
-  kits_added: number;
+  invitedBy: { _id: string; email: string; username: string };
+  kitsModified: number;
+  kitsAdded: number;
+  kitsVerified: number
 }
 
 export interface Location {

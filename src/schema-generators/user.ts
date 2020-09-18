@@ -14,8 +14,8 @@ export const userSchemaGen = (num?: number) => {
   schema.maxItems = num || 5;
   props.email.faker = 'internet.email';
   props.username.faker = 'internet.userName';
-  props.invited_by.properties.username.faker = 'internet.userName';
-  props.invited_by.properties.email.faker = 'internet.email';
+  props.invitedBy.properties.username.faker = 'internet.userName';
+  props.invitedBy.properties.email.faker = 'internet.email';
 
   return schema;
 };
