@@ -2,6 +2,7 @@ export interface Kit {
   _id: string;
   location: Location;
   lastVerified: Date;
+  hidden: boolean;
   openingHours: [{ weekday: Weekday; opensAt: string; closesAt: string }];
   organizationName: string;
   expires: Date;
@@ -30,7 +31,8 @@ export interface User {
   invitedBy: { _id: string; email: string; username: string };
   kitsModified: number;
   kitsAdded: number;
-  kitsVerified: number
+  kitsVerified: number;
+  kitsDeleted: number;
 }
 
 export interface Location {

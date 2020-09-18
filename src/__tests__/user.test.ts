@@ -15,6 +15,7 @@ describe('genUsers', () => {
       'kitsAdded',
       'kitsModified',
       'kitsVerified',
+      'kitsDeleted',
       'roles',
     ];
     const INVITE_PROPS = ['_id', 'username', 'email'];

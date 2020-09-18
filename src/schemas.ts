@@ -33,7 +33,8 @@ export const usersSchema = {
       _id: { type: 'string' },
       kitsAdded: { type: 'number', minimum: 0 },
       kitsModified: { type: 'number', minimum: 0 },
-      kitsVerified: { type: 'number', minimum: 0},
+      kitsVerified: { type: 'number', minimum: 0 },
+      kitsDeleted: { type: 'number', minimum: 0 },
       password: { type: 'string' },
       username: { type: 'string' },
       activated: { type: 'boolean' },
@@ -81,6 +82,7 @@ export const kitSchema = {
       'expires',
       'organizationName',
       'notes',
+      'hidden',
       'createdBy',
       'createdOn',
       'lastVerifiedBy',
@@ -95,6 +97,7 @@ export const kitSchema = {
       lastVerifiedBy: { $ref: '#/definitions/user' },
       lastEditedOn: { type: 'string', format: 'date-time' },
       lastEditedBy: { $ref: '#/definitions/user' },
+      hidden: { type: 'boolean' },
       contacts: {
         type: 'array',
         items: {

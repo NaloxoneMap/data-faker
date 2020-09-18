@@ -47,7 +47,7 @@ export const genUsers = async (num?: number): Promise<User[]> => {
     user._id = Types.ObjectId().toHexString();
     user.activated = true;
     user.suspended = false;
-    user.invitedBy._id = Types.ObjectId().toHexString()
+    user.invitedBy._id = Types.ObjectId().toHexString();
     return user;
   });
 };

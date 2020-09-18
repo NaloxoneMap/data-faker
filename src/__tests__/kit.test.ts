@@ -10,6 +10,7 @@ describe('Public api kit functions', () => {
     const kits = await genKits(200);
     const KIT_PROP_TYPES: IPropType[] = [
       { name: '_id', type: 'string' },
+      { name: 'hidden', type: 'boolean' },
       { name: 'location', type: 'object' },
       { name: 'lastVerified', type: 'object' },
       { name: 'openingHours', type: 'object' },
