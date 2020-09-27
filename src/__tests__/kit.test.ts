@@ -9,7 +9,7 @@ describe('Public api kit functions', () => {
   it('generates expected number of objects, whose attributes are of correct type', async (done) => {
     const kits = await genKits(200);
     const KIT_PROP_TYPES: IPropType[] = [
-      { name: '_id', type: 'string' },
+      { name: '_id', type: 'object' },
       { name: 'hidden', type: 'boolean' },
       { name: 'location', type: 'object' },
       { name: 'lastVerified', type: 'object' },
