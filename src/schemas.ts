@@ -53,7 +53,7 @@ export const usersSchema = {
       },
       roles: {
         type: 'array',
-        items: { type: 'string', pattern: 'MANAGE_USERS | VERIFY_KITS | MANAGE_KITS', minItems: 1, maxItems: 3 },
+        items: { type: 'string', pattern: 'MANAGE_USERS | VERIFY_KITS | EDIT_KITS', minItems: 1, maxItems: 3 },
       },
     },
   },
