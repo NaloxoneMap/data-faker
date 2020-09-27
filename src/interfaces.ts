@@ -1,5 +1,7 @@
+import { Types } from 'mongoose';
+
 export interface Kit {
-  _id: string;
+  _id: Types.ObjectId;
   location: Location;
   lastVerified: Date;
   hidden: boolean;
@@ -20,7 +22,7 @@ export enum Weekday {
 }
 
 export interface User {
-  _id: string;
+  _id: Types.ObjectId;
   username: string;
   password: string;
   email: string;
@@ -28,7 +30,7 @@ export interface User {
   invitedOn: string;
   lastLogin: Date;
   activated: boolean;
-  invitedBy: { _id: string; email: string; username: string };
+  invitedBy: { _id: Types.ObjectId; email: string; username: string };
   kitsModified: number;
   kitsAdded: number;
   kitsVerified: number;

@@ -24,7 +24,7 @@ export const genKits = async (num?: number): Promise<Kit[]> => {
       date.setMonth(date.getMonth() - 3);
       item.expires = date;
     }
-    item._id = Types.ObjectId().toHexString();
+    item._id = Types.ObjectId();
     item.expires = new Date(item.expires);
     item.lastVerified = new Date(item.lastVerified);
     // Need to generate own coordinates because of bug
@@ -44,10 +44,10 @@ export const genUsers = async (num?: number): Promise<User[]> => {
   const data = await _generate(userSchemaGen(num));
 
   return data.map((user: User) => {
-    user._id = Types.ObjectId().toHexString();
+    user._id = Types.ObjectId();
     user.activated = true;
     user.suspended = false;
-    user.invitedBy._id = Types.ObjectId().toHexString();
+    user.invitedBy._id = Types.ObjectId();
     return user;
   });
 };
