@@ -66,3 +66,5 @@ export const genUsers = async (num?: number): Promise<User[]> => {
     return user;
   });
 };
+
+export { Kit, User };
