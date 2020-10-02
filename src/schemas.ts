@@ -6,9 +6,10 @@
  * it is being used to generate.
  *
  */
+
 export const usersSchema = {
   definitions: {
-    email: { type: 'string', format: 'email' },
+    email: { type: 'string', format: 'email', faker: 'internet.email' },
   },
   type: 'array',
   items: {
@@ -36,7 +37,7 @@ export const usersSchema = {
       kitsVerified: { type: 'number', minimum: 0 },
       kitsDeleted: { type: 'number', minimum: 0 },
       password: { type: 'string' },
-      username: { type: 'string' },
+      username: { type: 'string', faker: 'internet.userName' },
       activated: { type: 'boolean' },
       invitedOn: { type: 'string', format: 'date-time' },
       lastLogin: { type: 'string', format: 'date-time' },
@@ -47,7 +48,7 @@ export const usersSchema = {
         required: ['email', 'username', '_id'],
         properties: {
           _id: { type: 'string' },
-          username: { type: 'string' },
+          username: { type: 'string', faker: 'internet.userName' },
           email: { $ref: '#/definitions/email' },
         },
       },
@@ -59,14 +60,17 @@ export const usersSchema = {
   },
 };
 
+const newDate = new Date();
+newDate.setMonth(newDate.getMonth() + 1);
+
 export const kitSchema = {
   definitions: {
     user: {
       type: 'object',
       required: ['username', '_id', 'email'],
       properties: {
-        username: { type: 'string' },
-        email: { type: 'string', format: 'email' },
+        username: { type: 'string', faker: 'internet.userName' },
+        email: { type: 'string', format: 'email', faker: 'internet.email' },
         _id: { type: 'string' },
       },
     },
@@ -102,10 +106,12 @@ export const kitSchema = {
         type: 'array',
         items: {
           type: 'object',
-          required: ['info', 'name', 'public', 'primary'],
+          required: ['email', 'telephone1', 'telephone2', 'name', 'public', 'primary'],
           properties: {
-            info: { type: 'string' },
-            name: { type: 'string' },
+            telephone1: { type: 'string', faker: 'phone.phoneNumber' },
+            telephone2: { type: 'string', faker: 'phone.phoneNumber' },
+            email: { type: 'string', format: 'email', faker: 'internet.email' },
+            name: { type: 'string', faker: 'name.findName' },
             public: { type: 'boolean' },
             primary: { type: 'boolean' },
           },
@@ -115,12 +121,11 @@ export const kitSchema = {
         type: 'object',
         required: ['address', 'postalZip', 'country', 'provinceState', 'point', 'city'],
         properties: {
-          city: { type: 'string' },
           point: {
             type: 'object',
             required: ['type', 'coordinates'],
             properties: {
-              type: { type: 'string' },
+              type: { type: 'string', patten: 'Point' },
               coordinates: {
                 type: 'object',
                 required: ['lon', 'lat'],
@@ -131,10 +136,11 @@ export const kitSchema = {
               },
             },
           },
-          address: { type: 'string' },
-          postalZip: { type: 'string' },
-          country: { type: 'string' },
-          provinceState: { type: 'string' },
+          address: { type: 'string', faker: 'address.streetAddress' },
+          postalZip: { type: 'string', faker: 'address.zipCode' },
+          city: { type: 'string', pattern: 'Montreal' },
+          country: { type: 'string', pattern: 'Canada' },
+          provinceState: { type: 'string', pattern: 'Québec' },
         },
       },
       lastVerifiedOn: { type: 'string', format: 'date-time' },
@@ -152,7 +158,7 @@ export const kitSchema = {
         minItems: 7,
         maxItems: 7,
       },
-      expires: { type: 'string' },
+      expires: { type: 'string', pattern: newDate.toDateString() },
       organizationName: { type: 'string' },
       notes: {
         type: 'array',

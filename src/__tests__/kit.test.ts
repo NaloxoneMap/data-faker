@@ -25,11 +25,27 @@ describe('Public api kit functions', () => {
       { name: 'contacts', type: 'object' },
     ];
 
+    const CONTACT_PROP_TYPES: IPropType[] = [
+      { name: 'name', type: 'string' },
+      { name: 'email', type: 'string' },
+      { name: 'telephone1', type: 'string' },
+      { name: 'telephone2', type: 'string' },
+      { name: 'primary', type: 'boolean' },
+      { name: 'public', type: 'boolean' },
+    ];
+
     const test = KIT_PROP_TYPES.every((prop) =>
       kits.every((kit: any) => kit.hasOwnProperty(prop.name) && typeof kit[prop.name] === prop.type),
     );
 
+    const testContacts = CONTACT_PROP_TYPES.every((prop) =>
+      kits.every(({ contacts }) =>
+        contacts.every((contact: any) => contact.hasOwnProperty(prop.name) && typeof contact[prop.name] === prop.type),
+      ),
+    );
+
     expect(test).toEqual(true);
+    expect(testContacts).toEqual(true);
     done();
   });
 

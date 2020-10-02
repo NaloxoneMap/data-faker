@@ -1,12 +1,25 @@
+import { kitSchema, usersSchema } from './schemas';
 import { Kit, User } from './interfaces';
 import jsf from './jsf';
 import { randCoords } from './util';
-import { kitSchemaGen } from './schema-generators/kit';
-import { userSchemaGen } from './schema-generators/user';
+
 import { Types } from 'mongoose';
 
 const _generate = async (schema: any): Promise<any[]> => {
   return await jsf.resolve(schema);
+};
+
+const _addMin = (schema: any, num?: number) => {
+  /**
+   * @param {num}: Number of fake data objects that will be generated
+   * @return: the original schema with minItems and maxItems properties added.
+   */
+
+  // Setting minItems tells generator to create specified number of items
+  schema.minItems = num || 5; // Default 5
+  schema.maxItems = num || 5;
+
+  return schema;
 };
 
 export const genKits = async (num?: number): Promise<Kit[]> => {
@@ -15,7 +28,7 @@ export const genKits = async (num?: number): Promise<Kit[]> => {
    *
    * @returns an array of valid Kit objects.
    */
-  const data = await _generate(kitSchemaGen(num));
+  const data = await _generate(_addMin(kitSchema, num));
 
   return data.map((item: Kit, index: number) => {
     // Some of the fake data should be expired.
@@ -24,6 +37,8 @@ export const genKits = async (num?: number): Promise<Kit[]> => {
       date.setMonth(date.getMonth() - 3);
       item.expires = date;
     }
+
+    // Must be objectId, else find by id won't work.
     item._id = Types.ObjectId();
     item.expires = new Date(item.expires);
     item.lastVerified = new Date(item.lastVerified);
@@ -41,7 +56,7 @@ export const genUsers = async (num?: number): Promise<User[]> => {
    * @returns an array of valid User objects.
    */
 
-  const data = await _generate(userSchemaGen(num));
+  const data = await _generate(_addMin(usersSchema, num));
 
   return data.map((user: User) => {
     user._id = Types.ObjectId();
@@ -51,5 +66,3 @@ export const genUsers = async (num?: number): Promise<User[]> => {
     return user;
   });
 };
-
-export { Kit, User };
