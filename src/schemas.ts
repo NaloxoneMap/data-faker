@@ -159,7 +159,7 @@ export const kitSchema = {
         maxItems: 7,
       },
       expires: { type: 'string', pattern: newDate.toDateString() },
-      organizationName: { type: 'string' },
+      organizationName: { type: 'string', faker: 'company.companyName' },
       notes: {
         type: 'array',
         items: {
