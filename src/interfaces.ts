@@ -1,19 +1,21 @@
 import { Types } from 'mongoose';
 
-// TODO: Fix all these interfaces.
-
-export interface Kit {
-  _id: Types.ObjectId;
-  location: Location;
-  lastVerified: Date;
-  hidden: boolean;
-  openingHours: [{ weekday: Weekday; opensAt: string; closesAt: string }];
-  organizationName: string;
-  expires: Date;
-  notes?: [{ locale: string; content: string }];
-  contacts: Contact[];
+interface OpeningHours {
+  weekday: number;
+  opensAt: string;
+  closesAt: string;
 }
 
+interface INestedUser {
+  _id: string;
+  username: string;
+  email: string;
+}
+
+interface Note {
+  locale: string;
+  content: string;
+}
 interface Contact {
   telephone1: string;
   telephone2: string;
@@ -21,6 +23,23 @@ interface Contact {
   name: string;
   public: boolean;
   primary: boolean;
+}
+
+export interface Kit {
+  _id: Types.ObjectId;
+  organizationName: string;
+  contacts: Contact[];
+  location: Location;
+  hidden: boolean;
+  openingHours: OpeningHours[];
+  lastVerifiedOn: Date;
+  lastVerifiedBy: INestedUser;
+  createdOn: Date;
+  createdBy: INestedUser;
+  lastEditedOn: Date;
+  lastEditedBy: INestedUser;
+  expires: Date;
+  notes: Note[];
 }
 
 export enum Weekday {

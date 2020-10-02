@@ -41,7 +41,7 @@ export const genKits = async (num?: number): Promise<Kit[]> => {
     // Must be objectId, else find by id won't work.
     item._id = Types.ObjectId();
     item.expires = new Date(item.expires);
-    item.lastVerified = new Date(item.lastVerified);
+    item.lastVerifiedOn = new Date(item.lastVerifiedOn);
     // Need to generate own coordinates because of bug
     // in faker library
     item.location.point.coordinates = randCoords();
