@@ -12,7 +12,7 @@ describe('Public api kit functions', () => {
       { name: '_id', type: 'object' },
       { name: 'hidden', type: 'boolean' },
       { name: 'location', type: 'object' },
-      { name: 'lastVerified', type: 'object' },
+      { name: 'lastVerifiedOn', type: 'object' },
       { name: 'openingHours', type: 'object' },
       { name: 'expires', type: 'object' },
       { name: 'organizationName', type: 'string' },
