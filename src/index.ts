@@ -38,10 +38,18 @@ export const genKits = async (num?: number): Promise<Kit[]> => {
       item.expires = date;
     }
 
+    const DAYS = [0, 1, 2, 3, 4, 5, 6];
     // Must be objectId, else find by id won't work.
     item._id = Types.ObjectId();
     item.expires = new Date(item.expires);
     item.lastVerifiedOn = new Date(item.lastVerifiedOn);
+
+    const newHours = item.openingHours.map((day, i) => {
+      day.weekday = DAYS[i];
+      return day;
+    });
+
+    item.openingHours = newHours;
     // Need to generate own coordinates because of bug
     // in faker library
     item.location.point.coordinates = randCoords();

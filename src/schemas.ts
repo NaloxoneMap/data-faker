@@ -54,7 +54,7 @@ export const usersSchema = {
       },
       roles: {
         type: 'array',
-        items: { type: 'string', pattern: 'MANAGE_USERS|VERIFY_KITS|EDIT_KITS', minItems: 1, maxItems: 3 },
+        items: { type: 'string', pattern: 'MANAGE_USERS|DELETE_KITS|EDIT_KITS', minItems: 1, maxItems: 3 },
       },
     },
   },
@@ -150,7 +150,7 @@ export const kitSchema = {
           type: 'object',
           required: ['weekday', 'opensAt', 'closesAt'],
           properties: {
-            weekday: { type: 'integer', maximum: 6, minimum: 0 },
+            weekday: { type: 'integer', maximum: 6, minimum: 6 },
             opensAt: { type: 'string', pattern: '^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$|closed' },
             closesAt: { type: 'string', pattern: '^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$|closed' },
           },
