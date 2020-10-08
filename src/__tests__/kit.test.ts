@@ -1,4 +1,5 @@
 import { genKits } from '../index';
+import { Kit } from '../interfaces';
 
 interface IPropType {
   type: string;
@@ -6,8 +7,13 @@ interface IPropType {
 }
 
 describe('Public api kit functions', () => {
+  let kits: Kit[];
+
+  beforeAll(async () => {
+    kits = await genKits(200);
+  });
+
   it('generates expected number of objects, whose attributes are of correct type', async (done) => {
-    const kits = await genKits(200);
     const KIT_PROP_TYPES: IPropType[] = [
       { name: '_id', type: 'object' },
       { name: 'hidden', type: 'boolean' },
@@ -34,6 +40,12 @@ describe('Public api kit functions', () => {
       { name: 'public', type: 'boolean' },
     ];
 
+    const OPENING_HOURS_TYPES: IPropType[] = [
+      { name: 'opensAt', type: 'string' },
+      { name: 'closesAt', type: 'string' },
+      { name: 'closed', type: 'boolean' },
+    ];
+
     const test = KIT_PROP_TYPES.every((prop) =>
       kits.every((kit: any) => kit.hasOwnProperty(prop.name) && typeof kit[prop.name] === prop.type),
     );
@@ -44,8 +56,15 @@ describe('Public api kit functions', () => {
       ),
     );
 
+    const testHours = OPENING_HOURS_TYPES.every((prop) =>
+      kits.every(({ openingHours }) =>
+        openingHours.every((day: any) => day.hasOwnProperty(prop.name) && typeof day[prop.name] === prop.type),
+      ),
+    );
+
     expect(test).toEqual(true);
     expect(testContacts).toEqual(true);
+    expect(testHours).toEqual(true);
     done();
   });
 
@@ -53,5 +72,26 @@ describe('Public api kit functions', () => {
     const result = await genKits();
     expect(result.length).toEqual(5);
     done();
+  });
+
+  it('closed should be true if opensAt or closedAt is empty', () => {
+    kits.forEach((kit) => {
+      kit.openingHours.forEach(({ closesAt, opensAt, closed }) => {
+        if (closesAt === '') {
+          expect(opensAt).toEqual('');
+          expect(closed).toEqual(true);
+        }
+
+        if (opensAt === '') {
+          expect(closesAt).toEqual('');
+          expect(closed).toEqual(true);
+        }
+
+        if (!closed) {
+          expect(opensAt).toBeTruthy();
+          expect(closesAt).toBeTruthy();
+        }
+      });
+    });
   });
 });

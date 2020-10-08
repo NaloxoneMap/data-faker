@@ -4,6 +4,7 @@ interface OpeningHours {
   weekday: number;
   opensAt: string;
   closesAt: string;
+  closed: boolean;
 }
 
 interface INestedUser {
