@@ -41,6 +41,7 @@ describe('Public api kit functions', () => {
     ];
 
     const OPENING_HOURS_TYPES: IPropType[] = [
+      { name: 'weekday', type: 'number' },
       { name: 'opensAt', type: 'string' },
       { name: 'closesAt', type: 'string' },
       { name: 'closed', type: 'boolean' },
@@ -77,6 +78,7 @@ describe('Public api kit functions', () => {
   it('closed should be true if opensAt or closedAt is empty', () => {
     kits.forEach((kit) => {
       kit.openingHours.forEach(({ closesAt, opensAt, closed }) => {
+        console.log(`closes: ${closesAt}`, opensAt, closed);
         if (closesAt === '') {
           expect(opensAt).toEqual('');
           expect(closed).toEqual(true);
@@ -88,8 +90,9 @@ describe('Public api kit functions', () => {
         }
 
         if (!closed) {
-          expect(opensAt).toBeTruthy();
-          expect(closesAt).toBeTruthy();
+          const reg = RegExp(/^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/);
+          expect(reg.test(opensAt)).toBeTruthy();
+          expect(reg.test(closesAt)).toBeTruthy();
         }
       });
     });

@@ -150,44 +150,11 @@ export const kitSchema = {
           type: 'object',
           required: ['weekday', 'opensAt', 'closesAt', 'closed'],
           properties: {
-            weekday: { type: 'integer', maximum: 6, minimum: 6 },
+            weekday: { type: 'integer', maximum: 0, minimum: 6 },
+            closed: { type: 'boolean' },
             opensAt: { type: 'string' },
             closesAt: { type: 'string' },
-            closed: { type: 'boolean' },
           },
-          allOf: [
-            {
-              if: {
-                properties: { opensAt: { pattern: '^$' } },
-              },
-              then: {
-                properties: { closesAt: { pattern: '^$' }, closed: { value: true } },
-              },
-              else: {
-                properties: {
-                  closed: { value: false },
-                  closesAt: { type: 'string', pattern: '^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$' },
-                  opensAt: { type: 'string', pattern: '^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$' },
-                },
-              },
-            },
-
-            {
-              if: {
-                properties: { closesAt: { pattern: '^$' } },
-              },
-              then: {
-                properties: { opensAt: { pattern: '^$' }, closed: { value: true } },
-              },
-              else: {
-                properties: {
-                  closed: { value: false },
-                  closesAt: { type: 'string', pattern: '^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$' },
-                  opensAt: { type: 'string', pattern: '^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$' },
-                },
-              },
-            },
-          ],
         },
         minItems: 7,
         maxItems: 7,

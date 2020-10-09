@@ -1,5 +1,6 @@
 import { kitSchema, usersSchema } from './schemas';
 import { Kit, User } from './interfaces';
+import rand from 'randexp';
 import jsf from './jsf';
 import { randCoords } from './util';
 
@@ -46,6 +47,13 @@ export const genKits = async (num?: number): Promise<Kit[]> => {
 
     const newHours = item.openingHours.map((day, i) => {
       day.weekday = DAYS[i];
+      if (day.closed) {
+        day.closesAt = '';
+        day.opensAt = '';
+      } else {
+        day.closesAt = new rand(/^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/).gen();
+        day.opensAt = new rand(/^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/).gen();
+      }
       return day;
     });
 
